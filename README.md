@@ -9,21 +9,24 @@ Thanks to chat GPS the v 1.0 is publicly available.
 
 
 Prerequisites:
- -Python and packages
+ -Python and packages listed in the first lines of the script
  -Image to enhance
  -colorbar
  
-Usage:
+Usage examples:
 
- #esempio di elaborazione immagine direttamente in bianco e nero
- python3 sar5.py --input sar2_image.png --colorbar colorbar.png --output sar2_test --N 10
+ 
+ # Image directly converted in B/W, then elaborated 
+ python3 sar5.py --bw_input SanGottardo.png --colorbar colorbar.png --output SanGottardo --N 10
 
- #esempio di elaborazione immagine direttamente in bianco e nero
- python3 sar5.py --bw_input San_Gottardo.png --colorbar colorbar.png --output SanGottardo --N 10
-
+ # Image levels mapped on colorbar.png 
+ python3 sar5.py --input GranSasso.png --colorbar colorbar.png --output GranSasso --N 10
 
 NOTE: for images captured directly from Biondi/Malanga paper another image, the 'colorbar' is required.
 This is used for the normalization of colours in levels (0-1 / BW) used internally to elaborate the image.  
+
+GALLERY:
+
 
 Another, better, version maybe will be coming in the future.
 
