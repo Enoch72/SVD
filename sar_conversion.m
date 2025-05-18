@@ -9,14 +9,24 @@ function sar_conversion(varargin)
 
     % Parsing parametri
     p = inputParser;
-    addParameter(p, 'input', 'images/gransasso_image.png');
-    % Se si vuole conertire una immagine già in scala di grigi, sremmare il parametro bw_input
-    % addParameter(p, 'bw_input', 'images/San_Gottardo.png');
+    
+    % path immagine SAR a falsi colori da elaborare - SREMMARE PER USARE E REMMARE bw_input
+    % addParameter(p, 'input', 'images/gransasso_image.png');
+    
+    % path colorbar scala valori - quello di default è ricavato dal paper
     addParameter(p, 'colorbar', 'images/colorbar.png');
-    addParameter(p, 'output', 'output_GS_');
+    
+    % path per elaborare una immagine convertita direttamente in scala di grigi - SREMMARE
+    addParameter(p, 'bw_input', 'images/San_Gottardo.png');
+    
+    % Parte iniziale del nome delle 2 immagine in output: "_recolored.png" e "_bw.png" 
+    addParameter(p, 'output', 'output');
+    % Numero linee verticali adiacenti che verranno usate per la media
     addParameter(p, 'N', 5);
     parse(p, varargin{:});
     args = p.Results;
+    
+    pkg load image;
 
     % Estrazione colorbar
     colorbar_img = imread(args.colorbar);
@@ -33,37 +43,23 @@ function sar_conversion(varargin)
             gray_array = double(bw_img); % Immagine già in scala di grigi
         end
     else
-        % Conversione SAR -> B/N
+        % Conversione grafico SAR colori -> B/N
         sar_img = imread(args.input);
         [height, width, ~] = size(sar_img);
-        
-        % Ricerca colori più vicini (sostituisce cKDTree)
+        % Implementazione semplificata per ricerca colori
         sar_flat = reshape(sar_img, [], 3);
         gray_values = zeros(size(sar_flat, 1), 1);
-        n = size(sar_flat, 1)
-        
-        % Implementazione semplificata per ricerca colori
+        n = size(sar_flat, 1);
         for i = 1:n
-            distances = sum((cast(colorbar_colors,"double") - cast(sar_flat(i, :),"double")).^2, 2,"double");
-            % Vecchio codice (usando mink, non disponibile in Octave)
+            distances = sum((cast(colorbar_colors,"double") - cast(sar_flat(i, :),"double")).^2, 2);
             [~, idx] = min(distances);
-
-            % Nuovo codice equivalente per Octave
-            % idx = octave_mink(distances, 2);
-            
-            % Interpolazione lineare
-            % w = 1.0/(sqrt(distances(idx)) + 1.0e-8);
-            % w = w/sum(w);
-            % gray_values(i) = (linspace(0, 1, size(colorbar_colors, 1)) * w);
-            
-            gray_values(i) = idx; %colorbar_colors(idx);
+            gray_values(i) = idx;
         end
-        
         gray_array = reshape(gray_values, height, width) * 255 / size(colorbar_colors,1);
     end
 
     % Normalizzazione colonne
-    adjusted_array = adjust_columns(gray_array, args.N);
+    adjusted_array = adjust_columns(gray_array, args.N,5);
     imwrite(uint8(adjusted_array), [args.output '_bw.png']);
     
     % Ricolorazione
@@ -77,7 +73,6 @@ function adjusted = adjust_columns(img_array, N)
     column_means = mean(img_array, 1);
     
     % Implementazione sliding window
-    pkg load image
     padded = padarray(column_means, [0 N], 'symmetric');
     window_size = 2*N + 1;
     adjacent_means = zeros(1, length(column_means));
