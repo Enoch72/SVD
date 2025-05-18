@@ -7,19 +7,23 @@ The ispiration was coming from a very antique tool I created long time ago for e
 Supposed the mean of the luminosity of the vertical, adjacient, strips is similar the tool normalizes the luminosity of each vertical line, using the mean luminosity from the adjacient N lines.
 Thanks to chat GPS the v 1.0 is publicly available.
 
+Octvae:
 
-Prerequisites:
+The file sar_conversion.m can be tested and launched directly in Octave GUI.
+The launching parameters can be edited/modified directly in the script   
+The parameter usage is the same as Python version - see below 
+
+Python:
  -Python and packages listed in the first lines of the script
  -Image to enhance
  -colorbar
- 
-Usage examples:
-
+  
+Phyton usage examples:
  
  # Image directly converted in B/W, then elaborated 
  python3 sar5.py --bw_input SanGottardo.png --colorbar colorbar.png --output SanGottardo --N 10
 
- # Image levels mapped on colorbar.png 
+ # Image levels mapped on colorbar.png ( converted to BW / elaborated / reconverted to color) 
  python3 sar5.py --input GranSasso.png --colorbar colorbar.png --output GranSasso --N 10
 
 NOTE: for images captured directly from Biondi/Malanga paper another image, the 'colorbar' is required.
