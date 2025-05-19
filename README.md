@@ -4,12 +4,13 @@ Sar Vertical Destriper
 <p>An utility/tool to remove/attenuate vertical bands artifacts from SAR tomography images.
 Tested from Filippo Biondi site (https://www.harmonicsar.com/) and from the Biondi/Malanga Giza paper (https://arxiv.org/abs/2208.00811).</p>   
 <p>The images can be captured directly with the windows "Capture Tool" and saved as .png. In the gallery you can see the first results using grabbed images - not from original data.
-The ispiration was coming from a very antique tool I created long time ago for eliminating similar artifacts from raw, uncalibrated,  CDD satellite imagery from Mars Global Surveyor (MGS).
+The ispiration was coming from a very antique tool I created long time ago for eliminating similar artifacts from raw, uncalibrated,  CDD satellite imagery from Mars Global Surveyor (MGS) mission to Mars.
+The details of this antique tool are in the MGS (MGS/README.md) folder.
 Supposed the mean of the luminosity of the vertical, adjacient, strips is similar the tool normalizes the luminosity of each vertical line, using the mean luminosity from the adjacient N lines.
 
 Thanks to chat GPS the v 1.0 is publicly available.
 
-Octvae:
+Octave:
 
 The file sar_conversion.m can be tested and launched directly in Octave GUI.
 The launching parameters can be edited/modified directly in the script   
