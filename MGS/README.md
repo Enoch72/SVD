@@ -9,7 +9,7 @@ Supposed the mean of the luminosity of the vertical, adjacient, strips is simila
 </p>
 
 <p>
-The tool can processed RAW images available here: (https://asimov.msss.com/moc_gallery/)
+The tool can process RAW images from nasa archives available here: (https://asimov.msss.com/moc_gallery/)
 </p>
 
 
