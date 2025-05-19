@@ -10,23 +10,22 @@ Supposed the mean of the luminosity of the vertical, adjacient, strips is simila
 
 Thanks to chat GPS the v 1.0 is publicly available.
 
-Octave:
-
-The file sar_conversion.m can be tested and launched directly in Octave GUI.
-The launching parameters can be edited/modified directly in the script   
-The parameter usage is the same as Python version - see below 
-
-Python:
- * Python and packages listed in the first lines of the script
- * Image.png to enhance
- * colorbar.png to correctly map values
   
-Phyton usage examples:
+## Phyton usage examples:
+
   ### Image directly converted in B/W, then elaborated 
 > python3 sar5.py --bw_input SanGottardo.png --colorbar colorbar.png --output SanGottardo --N 10
 
  ### Image levels mapped on colorbar.png ( converted to BW / elaborated / reconverted to color) 
 > python3 sar5.py --input GranSasso.png --colorbar colorbar.png --output GranSasso --N 10
+
+
+## Octave:
+
+The file sar_conversion.m can be tested and launched directly in Octave GUI.
+The launching parameters can be edited/modified directly in the script.   
+The parameter usage is the same as Python version.
+
 
 ### NOTE:
 for colorized images captured directly from Biondi/Malanga paper, the 'colorbar.gif' is required - see colorbar.png in the image folder.
